@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>ex-dischi-musicali</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/framework.css">
+    </head>
+    <body>
+       <div id="app" class="container">
+        <div class="nav-bar">
+            <div class="element-left">
+                <img  src="img/logo.svg" alt="">
+                <ul>
+                    <li><a href="">Home</a> </li>
+                    <li><a href="">Serie Tv</a> </li>
+                    <li><a href="">Film</a> </li>
+                    <li><a href="">Nuovi e popolari</a> </li>
+                    <li><a href="">La mia lista</a></li>
+                </ul>    
+            </div>
+            <div class=" element-right ms_text_white">
+                <div class="search-box ">
+                    <i class="fas fa-search"></i>
+                    <input type="text" v-model="query" @keyup.enter="search"  placeholder="Cerca">
+                </div>
+                
+                <i id="search" class="fas fa-search"></i>
+                <i class="fas fa-gift"></i>
+                <i class="fas fa-bell"></i>
+                <div class="profile">
+                    <img class="width_10" src="img/profile.jpg" alt="">
+                    <span><i class="fas fa-sort-down"></i></span>
+                </div>
+            </div>
+
+        </div>
+            <div v-if="query.length==0" class="home">
+                <div v-if=""class="header">             
+                </div>
+                <div class="content-movie">
+                    <div class="wrap">
+                     <div class="box">
+                      <img src="img/profile.jpg" alt="">
+                      </div>
+                     </div>
+                 </div>
+            </div>
+            
+            <div v-if="query.length>0" class="search">
+                <div class="content-movie">
+                    <div class="wrap">
+                        <div v-for="items in searchElement" class="box">
+                            <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
+                         </div>
+                       
+                        
+                    </div>
+                  
+                 </div>
+            </div>
+            
+       
+       </div> 
+
+        <script src="js/script.js" charset="utf-8"></script>
+    </body>
+</html>
