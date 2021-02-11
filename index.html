@@ -55,9 +55,13 @@
                                     <path d="M14.0706788,11.3992752 C14.3937818,11.3992752 14.6770909,11.322063 14.9212,11.1664509 C15.1653091,11.0114327 15.3553697,10.792863 15.4913818,10.5107418 C15.6279879,10.2286206 15.695697,9.90136 15.695697,9.52717818 C15.695697,9.1535903 15.6279879,8.82573576 15.4913818,8.54361455 C15.3553697,8.26149333 15.1653091,8.04351758 14.9212,7.88790545 C14.6770909,7.73288727 14.3937818,7.65508121 14.0706788,7.65508121 C13.7475758,7.65508121 13.4642667,7.73288727 13.2201576,7.88790545 C12.9760485,8.04351758 12.7859879,8.26149333 12.6499758,8.54361455 C12.5139636,8.82573576 12.4456606,9.1535903 12.4456606,9.52717818 C12.4456606,9.90136 12.5139636,10.2286206 12.6499758,10.5107418 C12.7859879,10.792863 12.9760485,11.0114327 13.2201576,11.1664509 C13.4642667,11.322063 13.7475758,11.3992752 14.0706788,11.3992752 M14.0706788,12.9957842 C13.5634545,12.9957842 13.0995879,12.9090691 12.6784848,12.7344509 C12.2573818,12.5604267 11.8915152,12.3163176 11.5808848,12.0027176 C11.2708485,11.6891176 11.0314909,11.322063 10.8634061,10.9003661 C10.6953212,10.479263 10.6115758,10.0213358 10.6115758,9.52717818 C10.6115758,9.03302061 10.6953212,8.57568727 10.8634061,8.1539903 C11.0314909,7.73288727 11.2708485,7.36523879 11.5808848,7.05163879 C11.8915152,6.73803879 12.2573818,6.49452364 12.6784848,6.31990545 C13.0995879,6.14588121 13.5634545,6.05857212 14.0706788,6.05857212 C14.577903,6.05857212 15.0417697,6.14588121 15.4628727,6.31990545 C15.8839758,6.49452364 16.2498424,6.73803879 16.5604727,7.05163879 C16.871103,7.36523879 17.1098667,7.73288727 17.2779515,8.1539903 C17.4460364,8.57568727 17.5297818,9.03302061 17.5297818,9.52717818 C17.5297818,10.0213358 17.4460364,10.479263 17.2779515,10.9003661 C17.1098667,11.322063 16.871103,11.6891176 16.5604727,12.0027176 C16.2498424,12.3163176 15.8839758,12.5604267 15.4628727,12.7344509 C15.0417697,12.9090691 14.577903,12.9957842 14.0706788,12.9957842" fill="#FFFFFF"></path>
                                     <polygon fill="#FFFFFF" points="8.4639503 12.8342327 6.65837455 13.2666206 6.65837455 7.77862061 4.65323515 7.77862061 4.65323515 6.22012364 10.4690897 6.22012364 10.4690897 7.77862061 8.4639503 7.77862061"></polygon>
                             </svg>
-                            <span class="font_size_25 bold m_left10"> 
+                            <div class="review font_size_25 bold m_left10"> 
                                 Oggi al n° 1 in Italia
-                            </span>
+                                <div v-for="i in 5" class="star m_left10">
+                                    <i v-if="i<=star(mostpopular)" class="fas fa-star"></i>
+                                    <i v-else class="far fa-star"></i>
+                                </div>
+                            </div>
                             
                         </div>
                         <span class="m_top_20 font_size_18">{{mostpopular.overview}}</span>
@@ -68,52 +72,41 @@
                       
                     </div>     
                 </div>
-                <div class="content-movie">
-                    <div class="wrap">
-                        <div class="box">
-                            <img src="img/profile.jpg" alt="">
-                            <div class="wrapper-information">
-                                <div class="tools-items">
-                                    <div class="items">
-                                        <i class="fas fa-play-circle"></i>
-                                        <i class="fas fa-plus-circle"></i>
-                                        <i class="far fa-thumbs-up"></i>
-                                        <i class="far fa-thumbs-down"></i>
+                <div class="content-movie ms_text_white">
+                    <div class="categoria">
+                        <div class="categoria-header">
+                            <h2 class="m_left60">Titoli Del momento</h2>
+                        </div>
+                        <div class="slider">
+                            <div class="left-scroll" @click="scrolleft"><i class="fas fa-chevron-left"></i></div>
+                            <div v-for="(items,index) in popular" class="element">
+                                <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
+                                <div class="wrapper-information ms_text_white">
+                                    <h3>{{items.title}}</h3>
+                                    <div class="tools-items">
+                                        <div class="items-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                            <i class="fas fa-plus-circle"></i>
+                                            <i class="far fa-thumbs-up"></i>
+                                            <i class="far fa-thumbs-down"></i>
+                                        </div>
+                                        <div class="information">
+                                            <i class="fas fa-arrow-circle-down"></i>
+                                        </div>
                                     </div>
-                                    <div class="information">
-                                        <i class="fas fa-arrow-circle-down"></i>
+                                    <div class="information-items m_top_10 ms_text_white">
+                                        <span class="ms_green m_right_10">{{getRandom(50,100)}}% compatibile</span>
+                                        <span>4 stagioni</span>
                                     </div>
-                                </div>
-                                <div class="information-items m_top_10 ms_text_white">
-                                    <span class="ms_green m_right_10">98% compatibile</span>
-                                    <span>4 stagioni</span>
                                 </div>
                             </div>
+                            <div class="right-scroll"><i class=" fas fa-chevron-right"></i></div>
+                            
                         </div>
-                        <div class="box">
-                            <img src="img/profile.jpg" alt="">
-                            <div class="wrapper-information">
-                                
-                                <div class="tools-items">
-                                   
-                                    <div class="items">
-                                        <i class="fas fa-play-circle"></i>
-                                        <i class="fas fa-plus-circle"></i>
-                                        <i class="far fa-thumbs-up"></i>
-                                        <i class="far fa-thumbs-down"></i>
-                                    </div>
-                                    <div class="information">
-                                        <i class="fas fa-arrow-circle-down"></i>
-                                    </div>
-                                </div>
-                                <div class="information-items m_top_10 ms_text_white">
-                                    <span class="ms_green m_right_10">98% compatibile</span>
-                                    <span>4 stagioni</span>
-                                </div>
-                            </div>
-                        </div>
-                     </div>
-                 </div>
+                    </div>
+
+                    
+                </div>
             </div>
             
             <div v-else class="search">
@@ -135,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="information-items m_top_10 ms_text_white">
-                                <span class="ms_green m_right_10">98% compatibile</span>
+                                <span class="ms_green m_right_10">{{getRandom(50,100)}}% compatibile</span>
                                 <span>4 stagioni</span>
                             
                             </div>

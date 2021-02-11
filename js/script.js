@@ -22,7 +22,9 @@ var app = new Vue({
       searchElement:[],
       generi:[],
       popular:[],
-      mostpopular:'',  
+      mostpopular:'', 
+      scrollcount:0,
+      scrollclick:0, 
     },
     methods:{
         search(){
@@ -48,6 +50,18 @@ var app = new Vue({
            (this.query.length==0)?this.searchElement=[] :'';
             
         },
+        star(array){
+            return Math.floor(array.vote_average/2);
+        },
+         getRandom(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min; //Il max è incluso e il min è incluso
+     },
+     scrolleft(){
+         alert("c");
+     
+     }
        
 
    
@@ -75,5 +89,6 @@ var app = new Vue({
                
             })
             .catch(error => console.log('errore'));
+
     }
   });
