@@ -17,7 +17,7 @@ var app = new Vue({
       query:"",
       apikey:"b7ccd3b571de65818efd8d90d551616e",
       lang:"it-IT",
-      searchElement:[],
+      searchElement:0,
       generi:[],
       popular:[],
       mostpopular:'', 
@@ -55,7 +55,7 @@ var app = new Vue({
         })
         .then((result) => {
            
-            this.searchElement=this.searchElement.contact(result.data.results);
+            this.searchElement=this.searchElement.concat(result.data.results);
            console.log(this.searchElement);
            //filtriamo le categorie 
            
