@@ -154,7 +154,8 @@
                             <div v-for="(items,index) in popular" class="element">
                                 <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
                                 <div class="wrapper-information ms_text_white">
-                                    <h3>{{items.title}}</h3>
+                                    <h3 v-if="items.title!=null">{{items.title}}</h3>
+                                <h3 v-else>{{items.name}}</h3>
                                     <div class="tools-items">
                                         <div class="items-icon">
                                             <i class="fas fa-play-circle"></i>
