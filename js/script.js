@@ -61,6 +61,10 @@ var app = new Vue({
              this.movieChecked=array[index];
              console.log(array[index]);
              console.log(this.movieChecked);
+         },
+         closeChecked(){
+             
+             this.movieChecked=0;
          }
 
        

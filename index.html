@@ -16,6 +16,10 @@
        <div id="app" class="container">
         <div v-if=" movieChecked!=0" class="block-information">
             <div class="block">
+                <div class="close">
+                    <i @click="closeChecked" class="fas fa-times-circle"></i>
+                </div>
+               
                 <div class="image-info">
                     <img :src="'https://image.tmdb.org/t/p/w500'+movieChecked.poster_path" alt="">
                     <div class="information">
@@ -47,7 +51,7 @@
                         </div>
                         <div class="generi"></div>
                         <span>Generi:</span>
-                        
+
                     </div>
                 </div>
             </div>
@@ -116,7 +120,7 @@
                             <h2 class="m_left60">Titoli Del momento</h2>
                         </div>
                         <div class="slider">
-                            <div class="left-scroll" ><i class="fas fa-chevron-left"></i></div>
+                            
                             <div v-for="(items,index) in popular" class="element">
                                 <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
                                 <div class="wrapper-information ms_text_white">
@@ -138,10 +142,41 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="right-scroll"><i class=" fas fa-chevron-right"></i></div>
+                            
+                        </div>
+                    </div>
+                    <div class="categoria m_top_50">
+                        <div class="categoria-header">
+                            <h2 class="m_left60">Titoli Del momento</h2>
+                        </div>
+                        <div class="slider">
+                            
+                            <div v-for="(items,index) in popular" class="element">
+                                <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
+                                <div class="wrapper-information ms_text_white">
+                                    <h3>{{items.title}}</h3>
+                                    <div class="tools-items">
+                                        <div class="items-icon">
+                                            <i class="fas fa-play-circle"></i>
+                                            <i class="fas fa-plus-circle"></i>
+                                            <i class="far fa-thumbs-up"></i>
+                                            <i class="far fa-thumbs-down"></i>
+                                        </div>
+                                        <div class="information">
+                                            <i @click="checked(index,popular)" class="fas fa-arrow-circle-down"></i>
+                                        </div>
+                                    </div>
+                                    <div class="information-items m_top_10 ms_text_white">
+                                        <span class="ms_green m_right_10">{{getRandom(50,100)}}% compatibile</span>
+                                        <span>4 stagioni</span>
+                                    </div>
+                                </div>
+                            </div>
+                          
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div v-else class="search">
                 <div class="content-movie">
