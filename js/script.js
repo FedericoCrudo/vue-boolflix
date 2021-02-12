@@ -33,12 +33,17 @@ var app = new Vue({
         .get('https://api.themoviedb.org/3/search/multi',{
             params:{
                 api_key: this.apikey,
+
+
                 query:this.query,
                 language:this.lang,
             }
         })
         .then((result) => {
-           this.searchElement = result.data.results;
+           let a = result.data.results;
+            a.forEach(element => {
+                (element.media_type!="person")?this.searchElement.push(element) :'';
+            });
            console.log(this.searchElement);
            //filtriamo le categorie 
            
