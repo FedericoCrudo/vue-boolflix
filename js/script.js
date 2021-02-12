@@ -27,23 +27,35 @@ var app = new Vue({
     },
     methods:{
         search(){
-               
+               this.searchElement=[];
             
                axios
-        .get('https://api.themoviedb.org/3/search/multi',{
+        .get('https://api.themoviedb.org/3/search/movie',{
             params:{
                 api_key: this.apikey,
-
-
                 query:this.query,
                 language:this.lang,
             }
         })
         .then((result) => {
-           let a = result.data.results;
-            a.forEach(element => {
-                (element.media_type!="person")?this.searchElement.push(element) :'';
-            });
+           this.searchElement.push(...result.data.results);
+           console.log(this.searchElement);
+           //filtriamo le categorie 
+           
+        })
+        .catch(error => console.log('errore'));
+        
+        axios
+        .get('https://api.themoviedb.org/3/search/tv',{
+            params:{
+                api_key: this.apikey,
+                query:this.query,
+                language:this.lang,
+            }
+        })
+        .then((result) => {
+           
+            this.searchElement=this.searchElement.contact(result.data.results);
            console.log(this.searchElement);
            //filtriamo le categorie 
            
