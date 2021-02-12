@@ -14,6 +14,44 @@
     </head>
     <body>
        <div id="app" class="container">
+        <div v-if=" movieChecked!=0" class="block-information">
+            <div class="block">
+                <div class="image-info">
+                    <img :src="'https://image.tmdb.org/t/p/w500'+movieChecked.poster_path" alt="">
+                    <div class="information">
+                        <h1>{{movieChecked.title}}</h1>
+                        <div class="rew m_top_30">
+                            <div v-for="i in 5" class="star m_left10">
+                                <i v-if="i<=star(mostpopular)" class="fas fa-star"></i>
+                                <i v-else class="far fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="tools-checked m_top_30">
+                            <button class="riproduci"><i class="fas fa-play m_right_20"></i>Riproduci</button>
+                            <i class="fas fa-plus-circle"></i>
+                            <i class="far fa-thumbs-up"></i>
+                            <i class="far fa-thumbs-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="other-information ms_text_white ">
+                    <div class="left">
+                        <span class="ms_green m_bottom_10">{{getRandom(50,100)}}% compatibile</span>
+                        <p class="font_size_16">{{movieChecked.overview}}</p>
+                        
+                    </div>  
+                    <div class="right">
+                        <div class="cast ">
+                            <span>Cast:</span>
+                        </div>
+                        <div class="generi"></div>
+                        <span>Generi:</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="nav-bar">
             <div class="element-left">
                 <img  src="img/logo.svg" alt="">
@@ -78,7 +116,7 @@
                             <h2 class="m_left60">Titoli Del momento</h2>
                         </div>
                         <div class="slider">
-                            <div class="left-scroll" @click="scrolleft"><i class="fas fa-chevron-left"></i></div>
+                            <div class="left-scroll" ><i class="fas fa-chevron-left"></i></div>
                             <div v-for="(items,index) in popular" class="element">
                                 <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
                                 <div class="wrapper-information ms_text_white">
@@ -91,7 +129,7 @@
                                             <i class="far fa-thumbs-down"></i>
                                         </div>
                                         <div class="information">
-                                            <i class="fas fa-arrow-circle-down"></i>
+                                            <i @click="checked(index,popular)" class="fas fa-arrow-circle-down"></i>
                                         </div>
                                     </div>
                                     <div class="information-items m_top_10 ms_text_white">
@@ -101,14 +139,10 @@
                                 </div>
                             </div>
                             <div class="right-scroll"><i class=" fas fa-chevron-right"></i></div>
-                            
                         </div>
                     </div>
-
-                    
                 </div>
             </div>
-            
             <div v-else class="search">
                 <div class="content-movie">
                     <div class="wrap">

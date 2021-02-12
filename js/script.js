@@ -8,8 +8,6 @@ $(document).ready(function(){
         let header=document.querySelector('.nav-bar');
         header.classList.toggle('scroll',window.scrollY >0)
     })
-
-
   });
 
 
@@ -25,6 +23,7 @@ var app = new Vue({
       mostpopular:'', 
       scrollcount:0,
       scrollclick:0, 
+      movieChecked:0,
     },
     methods:{
         search(){
@@ -57,11 +56,13 @@ var app = new Vue({
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min + 1)) + min; //Il max è incluso e il min è incluso
-     },
-     scrolleft(){
-         alert("c");
-     
-     }
+         },
+         checked(index,array){
+             this.movieChecked=array[index];
+             console.log(array[index]);
+             console.log(this.movieChecked);
+         }
+
        
 
    
@@ -89,6 +90,5 @@ var app = new Vue({
                
             })
             .catch(error => console.log('errore'));
-
     }
   });
