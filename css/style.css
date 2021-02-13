@@ -176,8 +176,8 @@ body{
  }
  .search{
      width: 100%;
-     height: 100vh;
-     margin-top: 150px;
+    
+    padding-top: 150px;
  }
  .search .content-movie{
      justify-content: center;
