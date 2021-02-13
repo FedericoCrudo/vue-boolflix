@@ -329,7 +329,7 @@ body{
     cursor: pointer;
 }
 .other-information{
-    padding: 20px;
+    padding: 15px;
     display: flex;
 }
 .other-information .left{
@@ -358,11 +358,12 @@ body{
 }
 .other-information .right .cast ul li, 
 .other-information .right .generi ul li{
-    display: flex;
+   display: inline-block;
 }
 .rew{
     display: flex;
 }
+
 
 
 

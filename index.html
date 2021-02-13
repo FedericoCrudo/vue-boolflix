@@ -48,15 +48,19 @@
                     </div>  
                     <div class="right m_left10">
                         <div class="cast ">
-                            <span>Cast:</span>
+                            <span class="ms_text_white">Cast:</span>
                             <ul class="m_left15">
-                                <li v-for="cast in movieChecked.cast">{{cast.name}}</li>
+                                <li v-for="cast in movieChecked.cast">{{cast.name}} </li>
                             </ul>
-                            
-
                         </div>
                         <div class="generi m_top_20"></div>
-                        <span>Generi:</span>
+                        <div class="generi">
+                            <span class="ms_text_white">Generi:</span>
+                            <ul class="m_left15">
+                                <li class="m_right_10" v-for="generi in movieChecked.generi">{{generi}} </li>
+                            </ul>
+                        </div>        
+                
 
                     </div>
                 </div>
@@ -145,14 +149,14 @@
                                     </div>
                                     <div class="information-items m_top_10 ms_text_white">
                                         <span class="ms_green m_right_10">{{getRandom(50,100)}}% compatibile</span>
-                                        <span>4 stagioni</span>
+                                        <span></span>
                                     </div>
                                 </div>
                             </div>
                             
                         </div>
                     </div>
-                    <div class="categoria m_top_50">
+                    <div v-for="" class="categoria m_top_50">
                         <div class="categoria-header">
                             <h2 class="m_left60">Titoli Del momento</h2>
                         </div>

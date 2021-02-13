@@ -40,26 +40,11 @@ var app = new Vue({
         .then((result) => {
            this.searchElement.push(...result.data.results);
            console.log(this.searchElement);
-           
-           axios
-           .get('https://api.themoviedb.org/3/genre/movie/list',{
-               params:{
-                   api_key: this.apikey,
-                   language:this.lang,
-               }
-           })
-           .then((result) => {
-              let a=result.data.genres;
-              console.log(a);
             this.searchElement.forEach(element => {
+                this.getGeneri(element.genre_ids,element);
                 this.getCast(element);
             });
-              
-              
-              
-           })
-           .catch(error => console.log('errore'));
-           
+
         })
         .catch(error => console.log('errore'));
         
@@ -100,24 +85,38 @@ var app = new Vue({
          closeChecked(){
              this.movieChecked=0;
          },
-         getGeneri(array,generi){
-            const generies=[];
-            generi.forEach(element => {
-                if(element.id==array.genre_ids){
-                    generies.push(element.name)
-                }
+         getGeneri(array_genre_ids,array){
+            axios
+           .get('https://api.themoviedb.org/3/genre/movie/list',{
+               params:{
+                   api_key: this.apikey,
+                   language:this.lang,
+               }
+           })
+           .then((result) => {
+              this.generi=result.data.genres;
+              console.log(this.generi);
+              Vue.set(array, "generi", []);
+              array_genre_ids.forEach(elementarray => {
+                this.generi.forEach(element => {
+                        if(elementarray==element.id){
+                            array.generi.push(element.name)
+                        }
+                });
             });
-   
-            return generies;
-            
+              
+              
+              
+           })
+           .catch(error => console.log('errore'));    
          },
          getCast(element){
             axios
             .get(`https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=${this.apikey}`)
             .then((result) => {
-              const Cast = result.data.cast.slice(0, 5);
-              Vue.set(element, "cast", Cast);
-              // this.$forceUpdate();
+              const cast = result.data.cast.slice(0, 5);
+              Vue.set(element, "cast", cast);
+              
             })
             .catch((error) => {console.log(error)})
          }
@@ -140,6 +139,7 @@ var app = new Vue({
                console.log(this.popular);
                this.popular.forEach(element => {
                     this.getCast(element);
+                    this.getGeneri(element.genre_ids,element);
                    if(element.popularity>a){
                        a=element.popularity;
                        this.mostpopular=element;
