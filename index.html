@@ -27,7 +27,7 @@
                         <h1 v-else>{{movieChecked.name}}</h1>
                         <div class="rew m_top_30">
                             <div v-for="i in 5" class="star m_left10">
-                                <i v-if="i<=star(mostpopular)" class="fas fa-star"></i>
+                                <i v-if="i<=star(movieChecked)" class="fas fa-star"></i>
                                 <i v-else class="far fa-star"></i>
                             </div>
                         </div>

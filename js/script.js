@@ -20,9 +20,7 @@ var app = new Vue({
       searchElement:0,
       generi:[],
       popular:[],
-      mostpopular:'', 
-      scrollcount:0,
-      scrollclick:0, 
+      mostpopular:'',  
       movieChecked:0,
     },
     methods:{
