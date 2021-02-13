@@ -23,7 +23,8 @@
                 <div class="image-info">
                     <img :src="'https://image.tmdb.org/t/p/w500'+movieChecked.poster_path" alt="">
                     <div class="information">
-                        <h1>{{movieChecked.title}}</h1>
+                        <h1 v-if="movieChecked.title!=null">{{movieChecked.title}}</h1>
+                        <h1 v-else>{{movieChecked.name}}</h1>
                         <div class="rew m_top_30">
                             <div v-for="i in 5" class="star m_left10">
                                 <i v-if="i<=star(mostpopular)" class="fas fa-star"></i>
@@ -45,11 +46,16 @@
                         <p class="font_size_16">{{movieChecked.overview}}</p>
                         
                     </div>  
-                    <div class="right">
+                    <div class="right m_left10">
                         <div class="cast ">
                             <span>Cast:</span>
+                            <ul class="m_left15">
+                                <li v-for="cast in movieChecked.cast">{{cast.name}}</li>
+                            </ul>
+                            
+
                         </div>
-                        <div class="generi"></div>
+                        <div class="generi m_top_20"></div>
                         <span>Generi:</span>
 
                     </div>
@@ -69,11 +75,11 @@
             </div>
             <div class=" element-right ms_text_white">
                 <div class="search-box ">
-                    <i class="fas fa-search"></i>
+                    <i @click="search()" class="fas fa-search"></i>
                     <input type="text" v-model="query" @keyup="clear" @keydown.enter="search"  placeholder="Cerca">
                 </div>
                 
-                <i id="search" class="fas fa-search"></i>
+                <i id="search" @click="search()" class="fas fa-search"></i>
                 <i class="fas fa-gift"></i>
                 <i class="fas fa-bell"></i>
                 <div class="profile">
@@ -124,7 +130,8 @@
                             <div v-for="(items,index) in popular" class="element">
                                 <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
                                 <div class="wrapper-information ms_text_white">
-                                    <h3>{{items.title}}</h3>
+                                    <h3 v-if="items.title!=null">{{items.title}}</h3>
+                                    <h3 v-else>{{items.name}}</h3>
                                     <div class="tools-items">
                                         <div class="items-icon">
                                             <i class="fas fa-play-circle"></i>
@@ -155,7 +162,7 @@
                                 <img :src="'https://image.tmdb.org/t/p/w342'+items.backdrop_path" alt="">
                                 <div class="wrapper-information ms_text_white">
                                     <h3 v-if="items.title!=null">{{items.title}}</h3>
-                                <h3 v-else>{{items.name}}</h3>
+                                    <h3 v-else>{{items.name}}</h3>
                                     <div class="tools-items">
                                         <div class="items-icon">
                                             <i class="fas fa-play-circle"></i>
@@ -197,7 +204,7 @@
                                     <i class="far fa-thumbs-down"></i>
                                 </div>
                                 <div class="information">
-                                    <i class="fas fa-arrow-circle-down"></i>
+                                    <i @click="checked(index,searchElement)" class="fas fa-arrow-circle-down"></i>
                                 </div>
                             </div>
                             <div class="information-items m_top_10 ms_text_white">

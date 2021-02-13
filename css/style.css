@@ -356,6 +356,10 @@ body{
     color:    #777;
     display: flex;
 }
+.other-information .right .cast ul li, 
+.other-information .right .generi ul li{
+    display: flex;
+}
 .rew{
     display: flex;
 }

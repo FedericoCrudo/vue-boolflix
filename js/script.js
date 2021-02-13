@@ -40,7 +40,25 @@ var app = new Vue({
         .then((result) => {
            this.searchElement.push(...result.data.results);
            console.log(this.searchElement);
-           //filtriamo le categorie 
+           
+           axios
+           .get('https://api.themoviedb.org/3/genre/movie/list',{
+               params:{
+                   api_key: this.apikey,
+                   language:this.lang,
+               }
+           })
+           .then((result) => {
+              let a=result.data.genres;
+              console.log(a);
+            this.searchElement.forEach(element => {
+                this.getCast(element);
+            });
+              
+              
+              
+           })
+           .catch(error => console.log('errore'));
            
         })
         .catch(error => console.log('errore'));
@@ -80,10 +98,30 @@ var app = new Vue({
              console.log(this.movieChecked);
          },
          closeChecked(){
-             
              this.movieChecked=0;
+         },
+         getGeneri(array,generi){
+            const generies=[];
+            generi.forEach(element => {
+                if(element.id==array.genre_ids){
+                    generies.push(element.name)
+                }
+            });
+   
+            return generies;
+            
+         },
+         getCast(element){
+            axios
+            .get(`https://api.themoviedb.org/3/movie/${element.id}/credits?api_key=${this.apikey}`)
+            .then((result) => {
+              const Cast = result.data.cast.slice(0, 5);
+              Vue.set(element, "cast", Cast);
+              // this.$forceUpdate();
+            })
+            .catch((error) => {console.log(error)})
          }
-
+  
        
 
    
@@ -101,12 +139,15 @@ var app = new Vue({
                this.popular=result.data.results;
                console.log(this.popular);
                this.popular.forEach(element => {
+                    this.getCast(element);
                    if(element.popularity>a){
                        a=element.popularity;
                        this.mostpopular=element;
+                      
                    }
                    
                });
+               
                console.log(this.mostpopular);
                
             })
