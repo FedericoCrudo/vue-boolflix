@@ -22,6 +22,7 @@ var app = new Vue({
       popular:[],
       mostpopular:'',  
       movieChecked:0,
+      home:[],
     },
     methods:{
         search(){
@@ -150,5 +151,25 @@ var app = new Vue({
                
             })
             .catch(error => console.log('errore'));
+
+                  
+            axios
+            .get('https://api.themoviedb.org/3/search/movie',{
+                params:{
+                    api_key: this.apikey,
+                    query:this.query,
+                    language:this.lang,
+                }
+            })
+            .then((result) => {
+               this.searchElement.push(...result.data.results);
+               console.log(this.searchElement);
+                this.searchElement.forEach(element => {
+                  
+                });
+    
+            })
+            .catch(error => console.log('errore'));
     }
+
   });
